@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Monedas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .converter {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>Conversor de Monedas</h1>
+        <input type="number" id="amount" placeholder="Cantidad">
+        <select id="from">
+            <option value="USD">USD - Dólar Estadounidense</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - Libra Esterlina</option>
+            <option value="JPY">JPY - Yen Japonés</option>
+        </select>
+        <select id="to">
+            <option value="USD">USD - Dólar Estadounidense</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - Libra Esterlina</option>
+            <option value="JPY">JPY - Yen Japonés</option>
+        </select>
+        <button onclick="convert()">Convertir</button>
+        <h2 id="result"></h2>
+    </div>
+    <script>
+        const exchangeRates = {
+            USD: { USD: 1, EUR: 0.85, GBP: 0.73, JPY: 110.0 },
+            EUR: { USD: 1.18, EUR: 1, GBP: 0.86, JPY: 130.0 },
+            GBP: { USD: 1.37, EUR: 1.16, GBP: 1, JPY: 150.0 },
+            JPY: { USD: 0.0091, EUR: 0.0077, GBP: 0.0067, JPY: 1 }
+        };
+        function convert() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const rate = exchangeRates[from][to];
+            const result = amount * rate;
+            document.getElementById('result').innerText = `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+        }
+    </script>
+</body>
+</html>
